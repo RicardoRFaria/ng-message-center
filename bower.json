@@ -1,6 +1,6 @@
 {
   "name": "ng-message-center-ext",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "authors": [
     "Federico Tarantini <federicot@gmail.com>",
 	"Ricardo Faria <ricardo.faria@outlook.com.br>"
@@ -13,5 +13,13 @@
     "alert"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/RicardoRFaria/ng-message-center"
+  "homepage": "https://github.com/RicardoRFaria/ng-message-center",
+  "ignore": [
+    "report",
+    "node_modules",
+    "src",
+    "bower.json",
+    "GruntFile.js",
+    ".gitignore"
+  ]
 }

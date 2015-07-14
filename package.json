@@ -1,0 +1,31 @@
+{
+  "name": "ng-message-center-ext",
+  "version": "0.0.6",
+  "description": "Message library for AngularJS",
+  "main": "ng-message-center.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-jshint": "^0.11.2",
+    "jshint-html-reporter": "^0.2.4"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-cssmin": "^0.12.3",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-uglify": "^0.9.1"
+  },
+  "scripts": {},
+  "keywords": [
+    "angular",
+    "message",
+    "alert"
+  ],
+  "author": [
+    "Federico Tarantini <federicot@gmail.com>",
+    "Ricardo Faria <ricardo.faria@outlook.com.br>"
+  ],
+  "license": "MIT"
+}
