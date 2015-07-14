@@ -1,8 +1,9 @@
 {
-  "name": "ng-message-center",
-  "version": "0.0.4",
+  "name": "ng-message-center-ext",
+  "version": "0.0.5",
   "authors": [
-    "Federico Tarantini <federicot@gmail.com>"
+    "Federico Tarantini <federicot@gmail.com>",
+	"Ricardo Faria <ricardo.faria@outlook.com.br>"
   ],
   "description": "Message library for AngularJS",
   "main": "ng-message-center.js",
@@ -12,5 +13,5 @@
     "alert"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/federicot/ng-message-center"
+  "homepage": "https://github.com/RicardoRFaria/ng-message-center"
 }
