@@ -6,6 +6,11 @@ Message library for AngularJS
 Usage
 =====
 
+#### Install with Bower
+```sh
+$ bower install ng-message-center-ext
+```
+
 Add module
 ```javascript
 angular.module('my-app', [
