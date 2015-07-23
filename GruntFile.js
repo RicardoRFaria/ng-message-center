@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             },
             target: {
                 files: {
-                    'dist/ng-message-center.min.css': ['dist/ng-message-center.css']
+                    'dist/ng-message-center.min.css': ['src/**/*.css']
                 }
             }
         },

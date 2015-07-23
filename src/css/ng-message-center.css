@@ -1,14 +1,42 @@
-.sp-messages-fixed{
+.message-center-grow {
     position:fixed;
-    bottom:10px;
-    left:20px;
-    max-width:500px;
-    z-index:100;
+    max-width:600px;
+    z-index:999;
 }
-.sp-messages-fixed ngmessagecenter-message > div{
-    margin-bottom:10px;
-}
-.sp-messages-fixed .close{
+
+.message-center-grow .close{
     margin-left:20px;
     margin-top:-2px;
+}
+
+.message-center-grow.bottom {
+    bottom:10px;
+}
+
+.message-center-grow.top {
+    top: 10px;
+}
+
+.message-center-grow.bottom > div {
+    margin-bottom:10px;
+}
+
+.message-center-grow.top > div {
+    margin-top:10px;
+}
+
+.message-center-grow.bottom.left {
+    left:20px;
+}
+
+.message-center-grow.bottom.right {
+    right:20px;
+}
+
+.message-center-grow.top.left {
+    left:20px;
+}
+
+.message-center-grow.top.right {
+    right:20px;
 }

@@ -113,10 +113,27 @@ angular.module('federicot.ng-message-center', [])
 		template: templateStr,
 		link: function(scope, element, attrs) {
 			var name = (attrs.name) ? attrs.name : 'default';
+            
 
 			if (scope.messages === undefined) {
 				scope.messages = new Object();
 			}
+            
+            if (attrs.growl !== undefined) {
+                element.addClass('message-center-grow');
+                var bottom = attrs.growl.indexOf("bottom") > -1;
+                var left = attrs.growl.indexOf("left") > -1
+                if (bottom) {
+                    element.addClass('bottom');
+                } else {
+                    element.addClass('top');
+                }
+                if (left) {
+                    element.addClass('left');
+                } else {
+                    element.addClass('right');
+                }
+            }
 
 			if (!element.attr('ng-repeat')) {
 				scope.messages[name] = ngMessageCenter.get(name);

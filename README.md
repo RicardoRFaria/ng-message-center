@@ -25,6 +25,10 @@ Add directive
 
 <!-- Assign a name -->
 <ngmessagecenter-messages name="sidebar"></ngmessagecenter-messages>
+
+
+<!-- Add grow option to message (default: top right) -->
+<ngmessagecenter-messages growl></ngmessagecenter-messages>
 ```
 
 Inject into your controller
@@ -56,4 +60,12 @@ name: 'default',
 next: false,
 stack: false,
 timeout: 3000
+```
+
+Growl Options
+```javascript
+<ngmessagecenter-messages growl="top left" />
+<ngmessagecenter-messages growl="top right" />
+<ngmessagecenter-messages growl="bottom left" />
+<ngmessagecenter-messages growl="bottom right" />
 ```
