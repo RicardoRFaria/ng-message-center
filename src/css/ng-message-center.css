@@ -1,0 +1,14 @@
+.sp-messages-fixed{
+    position:fixed;
+    bottom:10px;
+    left:20px;
+    max-width:500px;
+    z-index:100;
+}
+.sp-messages-fixed ngmessagecenter-message > div{
+    margin-bottom:10px;
+}
+.sp-messages-fixed .close{
+    margin-left:20px;
+    margin-top:-2px;
+}

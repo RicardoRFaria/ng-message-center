@@ -3,15 +3,23 @@ module.exports = function (grunt) {
     grunt.initConfig({
 
         concat: {
-            options: {
-                // define a string to put between each file in the concatenated output
-                separator: '\n'
+            js: {
+                options: {
+                    separator: '\n'
+                },
+                dist: {
+                    src: ['src/**/*.js'],
+                    dest: 'dist/ng-message-center.js' 
+                }
             },
-            dist: {
-                // the files to concatenate
-                src: ['src/**/*.js'],
-                // the location of the resulting JS file
-                dest: 'dist/ng-message-center.js' //<%= pkg.name %>
+            css: {
+                options: {
+                    separator: ''
+                },
+                dist: {
+                    src: ['src/**/*.css'],
+                    dest: 'dist/ng-message-center.css' 
+                }
             }
         },
 		
@@ -22,6 +30,18 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+        
+        cssmin: {
+            options: {
+                shorthandCompacting: false,
+                roundingPrecision: -1
+            },
+            target: {
+                files: {
+                    'dist/ng-message-center.min.css': ['dist/ng-message-center.css']
+                }
+            }
+        },
 
         jshint: {
             all: ['src/js/**.js'],
@@ -48,12 +68,13 @@ module.exports = function (grunt) {
 
     
     grunt.registerTask('test', ['clean', 'jshint']);
-    grunt.registerTask('release', ['test','concat', 'uglify']);
+    grunt.registerTask('default', ['test','concat', 'uglify', 'cssmin']);
     
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 };
 
