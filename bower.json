@@ -1,9 +1,9 @@
 {
   "name": "ng-message-center-ext",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "authors": [
     "Federico Tarantini <federicot@gmail.com>",
-	"Ricardo Faria <ricardo.faria@outlook.com.br>"
+	  "Ricardo Faria <ricardo.faria@outlook.com.br>"
   ],
   "description": "Message library for AngularJS",
   "main": "ng-message-center.js",
