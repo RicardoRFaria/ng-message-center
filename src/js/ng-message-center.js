@@ -104,19 +104,19 @@ angular.module('federicot.ng-message-center', [])
 
 .directive('ngmessagecenterMessages', ['ngMessageCenter', '$compile', function(ngMessageCenter, $compile) {
 	var templateStr = '<div class="row">' +
-		' <div class="col-lg-12">' +
+		' <div class="col-lg-12 " ng-repeat="message in getMyMessages()">' +
 		'     <ngmessagecenter-message message="message"></ngmessagecenter-message>' +
 		' </div>' +
 		'</div>';
 	return {
 		restrict: 'E',
 		template: templateStr,
-		link: function(scope, element, attrs) {
+        scope: {},
+		link: function($scope, element, attrs) {
 			var name = (attrs.name) ? attrs.name : 'default';
-            
 
-			if (scope.messages === undefined) {
-				scope.messages = new Object();
+			if ($scope.messages === undefined) {
+				$scope.messages = new Object();
 			}
             
             if (attrs.growl !== undefined) {
@@ -134,12 +134,13 @@ angular.module('federicot.ng-message-center', [])
                     element.addClass('right');
                 }
             }
-
-			if (!element.attr('ng-repeat')) {
-				scope.messages[name] = ngMessageCenter.get(name);
-				element.attr('ng-repeat', 'message in messages[\'' + name + '\'].current');
-				$compile(element)(scope);
-			}
+            
+            $scope.getMyMessages = function() {
+                if ($scope.messages[name] === undefined) {
+                    $scope.messages[name] = ngMessageCenter.get(name);
+                }
+                return $scope.messages[name].current;
+            };
 		}
 	};
 }])
