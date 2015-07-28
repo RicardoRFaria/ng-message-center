@@ -3,7 +3,7 @@
   "version": "0.0.8",
   "authors": [
     "Federico Tarantini <federicot@gmail.com>",
-	  "Ricardo Faria <ricardo.faria@outlook.com.br>"
+    "Ricardo Faria <ricardo.faria@outlook.com.br>"
   ],
   "description": "Message library for AngularJS",
   "main": "ng-message-center.js",
@@ -21,5 +21,8 @@
     "bower.json",
     "GruntFile.js",
     ".gitignore"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
 }

@@ -1,7 +1,7 @@
 .message-center-grow {
     position:fixed;
     max-width:600px;
-    z-index:999;
+    z-index:99999;
 }
 
 .message-center-grow .close{

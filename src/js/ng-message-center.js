@@ -111,7 +111,6 @@ angular.module('federicot.ng-message-center', [])
 	return {
 		restrict: 'E',
 		template: templateStr,
-        scope: {},
 		link: function($scope, element, attrs) {
 			var name = (attrs.name) ? attrs.name : 'default';
 
