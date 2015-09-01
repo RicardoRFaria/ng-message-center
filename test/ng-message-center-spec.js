@@ -70,6 +70,20 @@ describe('NgMessageCenter', function () {
                 expect(getMessagesElements().length).toBe(0);
             });
             
+            it('can\'t stack messages if stack is false', function () {
+                ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
+                ngMessageCenter.error({ title: 'Oh snap2!', text: 'Something went wrong, try submitting again2' });
+                $rootScope.$apply();
+                expect(getMessagesElements().length).toBe(1);
+            });
+            
+            it('should stack messages if stack is true', function () {
+                ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
+                ngMessageCenter.error({ title: 'Oh snap2!', text: 'Something went wrong, try submitting again2', stack: true });
+                $rootScope.$apply();
+                expect(getMessagesElements().length).toBe(2);
+            });
+            
             it('can\'t be removed if timeout is false', function () {
                 ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again', timeout: false});
                 $rootScope.$apply();
