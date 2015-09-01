@@ -1,6 +1,6 @@
 {
   "name": "ng-message-center-ext",
-  "version": "0.0.10",
+  "version": "0.0.11-SNAPSHOT",
   "authors": [
     "Federico Tarantini <federicot@gmail.com>",
     "Ricardo Faria <ricardo.faria@outlook.com.br>"
@@ -20,9 +20,11 @@
     "src",
     "bower.json",
     "GruntFile.js",
-    ".gitignore"
+    ".gitignore",
+    "test"
   ],
   "dependencies": {
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "angular": ">=1.3.18"
   }
 }
