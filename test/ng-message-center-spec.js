@@ -69,6 +69,22 @@ describe('NgMessageCenter', function () {
                 $timeout.flush();
                 expect(getMessagesElements().length).toBe(0);
             });
+            
+            it('can\'t be removed if timeout is false', function () {
+                ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again', timeout: false});
+                $rootScope.$apply();
+                expect(getMessagesElements().length).toBe(1);
+                
+                var errorCatched = false;
+                try {
+                    $timeout.flush();   
+                } catch (err) {
+                    errorCatched = true;
+                } finally {
+                    expect(errorCatched).toBeTruthy();
+                }
+                expect(getMessagesElements().length).toBe(1);
+            });
 
         });
 
