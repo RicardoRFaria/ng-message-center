@@ -49,6 +49,18 @@ describe('NgMessageCenter', function () {
         return getRowElement().children();
     }
 
+    function getFirstMessageElement() {
+        if (getMessagesElements().length > 0) {
+            return $(getMessagesElements()[0]);
+        } else {
+            throw "No messages!";
+        }
+    }
+
+    function getCloseButtonOfElement(message) {
+        return $(message.find('button')[0]);
+    }
+
     describe('simple', function () {
 
         beforeEach(function () {
@@ -65,6 +77,15 @@ describe('NgMessageCenter', function () {
                 ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
                 $rootScope.$apply();
                 expect(getMessagesElements().length).toBe(1);
+            });
+
+            it('should remove message after click at \'x\'', function () {
+                ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
+                $rootScope.$apply();
+                expect(getMessagesElements().length).toBe(1);
+
+                angular.element(getCloseButtonOfElement(getFirstMessageElement())).trigger('click');
+                expect(getMessagesElements().length).toBe(0);
             });
 
             it('should hide messages after timeout', function () {
@@ -122,7 +143,7 @@ describe('NgMessageCenter', function () {
                 expect(elm.hasClass('right')).toBeTruthy();
             });
         });
-        
+
         describe('right', function () {
             beforeEach(function () {
                 initializeTest({ growl: true, growlposition: 'rigth' });
@@ -134,7 +155,7 @@ describe('NgMessageCenter', function () {
                 expect(elm.hasClass('right')).toBeTruthy();
             });
         });
-        
+
         describe('left', function () {
             beforeEach(function () {
                 initializeTest({ growl: true, growlposition: 'left' });
@@ -146,7 +167,7 @@ describe('NgMessageCenter', function () {
                 expect(elm.hasClass('left')).toBeTruthy();
             });
         });
-        
+
         describe('bottom right', function () {
             beforeEach(function () {
                 initializeTest({ growl: true, growlposition: 'bottom rigth' });
@@ -158,7 +179,7 @@ describe('NgMessageCenter', function () {
                 expect(elm.hasClass('right')).toBeTruthy();
             });
         });
-        
+
         describe('bottom left', function () {
             beforeEach(function () {
                 initializeTest({ growl: true, growlposition: 'bottom left' });

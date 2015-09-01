@@ -146,7 +146,7 @@ angular.module('federicot.ng-message-center', [])
 
 .directive('ngmessagecenterMessage', ['$timeout', function($timeout) {
     var templateStr = '<div class="alert fade in" role="alert" ng-class="message.type">' +
-                      ' <button type="button" class="close" data-dismiss="alert">' +
+                      ' <button type="button" class="close" data-dismiss="alert" ng-click="closeMessage()">' +
                       '      <span aria-hidden="true">×</span>' +
                       ' </button>' +
                       ' <strong ng-if="message.title">{{message.title}} </strong>{{message.text}}' +
@@ -156,10 +156,9 @@ angular.module('federicot.ng-message-center', [])
         template: templateStr,
         link: function(scope, element, attrs) {
             if (scope.message !== undefined && scope.message.timeout) {
-                var $element = angular.element(element).children().first();
-                $element.on('closed.bs.alert', function() {
+                scope.closeMessage = function () {
                     scope.message.close();
-                });
+                }
                 $timeout(function() {
                     scope.message.close();
                 }, scope.message.timeout);
