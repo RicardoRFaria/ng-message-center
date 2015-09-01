@@ -41,12 +41,12 @@ describe('NgMessageCenter', function () {
         scope = elm.isolateScope();
     }
 
-    function getRowElement() {
-        return $(elm.children()[0]);
+    function getRowElement(element) {
+        return $((element || elm).children()[0]);
     }
 
-    function getMessagesElements() {
-        return getRowElement().children();
+    function getMessagesElements(element) {
+        return getRowElement((element || elm)).children();
     }
 
     function getFirstMessageElement() {
@@ -129,6 +129,41 @@ describe('NgMessageCenter', function () {
 
         });
 
+    });
+
+    describe('named messages', function () {
+        var elementNamed;
+        beforeEach(function () {
+            initializeTest();
+            elementNamed = $compile(getTemplate({ name: 'messageTwo' }))($rootScope);
+            $rootScope.$apply();
+        });
+        
+        afterEach(function () {
+            elementNamed = undefined;
+        });
+
+        it('should initialize whithout itens', function () {
+            expect(getMessagesElements().length).toBe(0);
+            expect(getMessagesElements(elementNamed).length).toBe(0);
+        });
+
+        it('should add message to simple but not for named message', function () {
+            ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
+            $rootScope.$apply();
+            console.log(elm);
+            expect(getMessagesElements(elm).length).toBe(1);
+            expect(getMessagesElements(elementNamed).length).toBe(0);
+        });
+        
+        it('should add message to named but not for single', function () {
+            console.log('TEST STARTED');
+            ngMessageCenter.error({ title: 'Oh snap2!', text: 'Something went wrong, try submitting again2', name: 'messageTwo' });
+            $rootScope.$apply();
+            console.log(elm);
+            expect(getMessagesElements(elm).length).toBe(0);
+            expect(getMessagesElements(elementNamed).length).toBe(1);
+        });
     });
 
     describe('growl', function () {

@@ -86,6 +86,7 @@ angular.module('federicot.ng-message-center', [])
         get: function(name) {
             if (!name) name = 'default';
             this.createSpace(name);
+            console.log('Getting scope message of: ' + name);
             return messages[name];
         }
     };
@@ -96,8 +97,6 @@ angular.module('federicot.ng-message-center', [])
     $rootScope.$on('$locationChangeSuccess', function() {
         service.moveNextToCurrent()
     });
-
-    service.createSpace('default');
 
     return service;
 }])
