@@ -151,16 +151,16 @@ describe('NgMessageCenter', function () {
         it('should add message to simple but not for named message', function () {
             ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
             $rootScope.$apply();
-            console.log(elm);
+            //console.log(elm);
             expect(getMessagesElements(elm).length).toBe(1);
             expect(getMessagesElements(elementNamed).length).toBe(0);
         });
         
         it('should add message to named but not for single', function () {
-            console.log('TEST STARTED');
+            //console.log('TEST STARTED');
             ngMessageCenter.error({ title: 'Oh snap2!', text: 'Something went wrong, try submitting again2', name: 'messageTwo' });
             $rootScope.$apply();
-            console.log(elm);
+            //console.log(elm);
             expect(getMessagesElements(elm).length).toBe(0);
             expect(getMessagesElements(elementNamed).length).toBe(1);
         });

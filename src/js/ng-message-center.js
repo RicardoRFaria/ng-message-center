@@ -86,7 +86,6 @@ angular.module('federicot.ng-message-center', [])
         get: function(name) {
             if (!name) name = 'default';
             this.createSpace(name);
-            console.log('Getting scope message of: ' + name);
             return messages[name];
         }
     };
@@ -103,7 +102,7 @@ angular.module('federicot.ng-message-center', [])
 
 .directive('ngmessagecenterMessages', ['ngMessageCenter', '$compile', function(ngMessageCenter, $compile) {
 	var templateStr = '<div class="row">' +
-		' <div class="col-lg-12 " ng-repeat="message in getMyMessages()">' +
+		' <div class="col-lg-12 " ng-repeat="message in messages.current">' +
 		'     <ngmessagecenter-message message="message"></ngmessagecenter-message>' +
 		' </div>' +
 		'</div>';
@@ -133,12 +132,7 @@ angular.module('federicot.ng-message-center', [])
                 }
             }
             
-            $scope.getMyMessages = function() {
-                if ($scope.messages[name] === undefined) {
-                    $scope.messages[name] = ngMessageCenter.get(name);
-                }
-                return $scope.messages[name].current;
-            };
+            $scope.messages = ngMessageCenter.get(name);
 		}
 	};
 }])
