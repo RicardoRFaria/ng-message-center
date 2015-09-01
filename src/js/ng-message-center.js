@@ -161,7 +161,7 @@ angular.module('federicot.ng-message-center', [])
                     scope.message.close();
                 });
                 $timeout(function() {
-                    $element.alert('close');
+                    scope.message.close();
                 }, scope.message.timeout);
             }
         }

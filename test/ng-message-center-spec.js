@@ -1,20 +1,21 @@
 function getTemplate(param) {
-    var template = '<ngmessagecenter-messages></ngmessagecenter-messages>';
+    var template = '<ngmessagecenter-messages id="simple"></ngmessagecenter-messages>';
     return template;
-}
+};
 
 describe('NgMessageCenter', function () {
 
-    var elm, scope, diretiva;
+    var elm, scope;
 
     beforeEach(module('federicot.ng-message-center'));
 
-    var $rootScope, $compile, $controller, $ngMessageCenter;
-    beforeEach(inject(function (_$rootScope_, _$compile_, _$controller_, _ngMessageCenter_) {
+    var $rootScope, $compile, $controller, ngMessageCenter, $timeout;
+    beforeEach(inject(function (_$rootScope_, _$compile_, _$controller_, _ngMessageCenter_, _$timeout_) {
         $rootScope = _$rootScope_.$new();
         $compile = _$compile_;
         $controller = _$controller_;
-        $ngMessageCenter = _ngMessageCenter_;
+        ngMessageCenter = _ngMessageCenter_;
+        $timeout = _$timeout_;
     }));
     
     /**
@@ -28,24 +29,15 @@ describe('NgMessageCenter', function () {
         elm = $compile(getTemplate(templateParam))($rootScope);
         $rootScope.$apply();
         scope = elm.isolateScope();
-        diretiva = $(elm.children()[0]);
-        scope = diretiva.isolateScope();
-
-        //elm.appendTo(document.body);
+        elm.appendTo(document.body);
     }
 
-    function getFormElement() {
-        return $(diretiva.children()[0]);
+    function getRowElement() {
+        return $(elm.children()[0]);
     }
 
-    function getCardElement() {
-        var childrenElement = elm.find('.sp-input-select__match')[0];
-        return $(childrenElement);
-    }
-
-    function getSelectedItens() {
-        var childrenElement = elm.find('.sp-input-select__match-items>li');
-        return $(childrenElement);
+    function getMessagesElements() {
+        return getRowElement().children();
     }
 
     describe('simple', function () {
@@ -54,69 +46,31 @@ describe('NgMessageCenter', function () {
             initializeTest({});
         });
 
-        /*afterEach(function () {
-            elm.remove();
-        });*/
-
         it('should initialize whithout itens', function () {
-            expect(false).toBeFalsy();
+            expect(getMessagesElements().length).toBe(0);
         });
 
-        /*describe('model', function () {
-            it('should be changed after user selection', function (done) {
-                selectOneUser();
-                setTimeout(function () {
-                    $rootScope.$apply();
-                    expect($rootScope.usuario).toBeDefined();
-                    expect($rootScope.usuario instanceof Array).toBeFalsy();
-                    done();
-                }, WAIT_TIME_OF_REQUEST);
+        describe('messages', function () {
+            afterEach(function () {
+                elm.remove();
             });
+
+            it('should show message after add', function () {
+                ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
+                $rootScope.$apply();
+                expect(getMessagesElements().length).toBe(1);
+            });
+
+            it('should hide messages after timeout', function () {
+                ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again', timeout: 300 });
+                $rootScope.$apply();
+                expect(getMessagesElements().length).toBe(1);
+                // Test click and timeout after this
+                $timeout.flush();
+                expect(getMessagesElements().length).toBe(0);
+            });
+
         });
-
-        describe('inputs', function () {
-            it('should start visible', function () {
-                expect(getFormElement().hasClass('ng-show')).toBeTruthy();
-                expect(getFormElement().hasClass('ng-hide')).toBeFalsy();
-            });
-
-            it('should be hidden when value is defined', function (done) {
-                selectOneUser();
-                setTimeout(function () {
-                    $rootScope.$apply();
-                    expect(getFormElement().hasClass('ng-hide')).toBeTruthy();
-                    expect(getFormElement().hasClass('ng-show')).toBeFalsy();
-                    done();
-                }, WAIT_TIME_OF_REQUEST);
-            });
-
-            it('should clear inputs after select one user', function (done) {
-                selectOneUser();
-                setTimeout(function () {
-                    $rootScope.$apply();
-                    expect(angular.element(getIdInput()).val()).toBe('');
-                    expect(angular.element(getDescInput()).val()).toBe('');
-                    done();
-                }, WAIT_TIME_OF_REQUEST);
-            });
-        });
-
-        describe('card', function () {
-            it('should start hidden', function () {
-                expect(getCardElement().hasClass('ng-hide')).toBeTruthy();
-                expect(getCardElement().hasClass('ng-show')).toBeFalsy();
-            });
-
-            it('should be visible when value is defined', function (done) {
-                selectOneUser();
-                setTimeout(function () {
-                    $rootScope.$apply();
-                    expect(getCardElement().hasClass('ng-show')).toBeTruthy();
-                    expect(getCardElement().hasClass('ng-hide')).toBeFalsy();
-                    done();
-                }, WAIT_TIME_OF_REQUEST);
-            });
-        });*/
 
     });
 });
