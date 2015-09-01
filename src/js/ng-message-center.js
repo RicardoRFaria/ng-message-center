@@ -119,7 +119,7 @@ angular.module('federicot.ng-message-center', [])
 			}
             
             if (attrs.growl !== undefined) {
-                element.addClass('message-center-grow');
+                element.addClass('message-center-growl');
                 var bottom = attrs.growl.indexOf("bottom") > -1;
                 var left = attrs.growl.indexOf("left") > -1
                 if (bottom) {

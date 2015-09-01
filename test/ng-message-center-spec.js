@@ -1,5 +1,15 @@
 function getTemplate(param) {
-    var template = '<ngmessagecenter-messages id="simple"></ngmessagecenter-messages>';
+    var template = '<ngmessagecenter-messages';
+    if (param.name) {
+        template += ' name="' + param.name + '"';
+    }
+    if (param.growl) {
+        template += ' growl';
+        if (param.growlposition) {
+            template += '="' + param.growlposition + '"';
+        }
+    }
+    template += '></ngmessagecenter-messages>';
     return template;
 };
 
@@ -29,7 +39,6 @@ describe('NgMessageCenter', function () {
         elm = $compile(getTemplate(templateParam))($rootScope);
         $rootScope.$apply();
         scope = elm.isolateScope();
-        elm.appendTo(document.body);
     }
 
     function getRowElement() {
@@ -51,9 +60,6 @@ describe('NgMessageCenter', function () {
         });
 
         describe('messages', function () {
-            afterEach(function () {
-                elm.remove();
-            });
 
             it('should show message after add', function () {
                 ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
@@ -69,29 +75,29 @@ describe('NgMessageCenter', function () {
                 $timeout.flush();
                 expect(getMessagesElements().length).toBe(0);
             });
-            
+
             it('can\'t stack messages if stack is false', function () {
                 ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
                 ngMessageCenter.error({ title: 'Oh snap2!', text: 'Something went wrong, try submitting again2' });
                 $rootScope.$apply();
                 expect(getMessagesElements().length).toBe(1);
             });
-            
+
             it('should stack messages if stack is true', function () {
                 ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again' });
                 ngMessageCenter.error({ title: 'Oh snap2!', text: 'Something went wrong, try submitting again2', stack: true });
                 $rootScope.$apply();
                 expect(getMessagesElements().length).toBe(2);
             });
-            
+
             it('can\'t be removed if timeout is false', function () {
-                ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again', timeout: false});
+                ngMessageCenter.error({ title: 'Oh snap!', text: 'Something went wrong, try submitting again', timeout: false });
                 $rootScope.$apply();
                 expect(getMessagesElements().length).toBe(1);
-                
+
                 var errorCatched = false;
                 try {
-                    $timeout.flush();   
+                    $timeout.flush();
                 } catch (err) {
                     errorCatched = true;
                 } finally {
@@ -102,5 +108,67 @@ describe('NgMessageCenter', function () {
 
         });
 
+    });
+
+    describe('growl', function () {
+        describe('default', function () {
+            beforeEach(function () {
+                initializeTest({ growl: true });
+            });
+
+            it('should initialize with growl right top', function () {
+                expect(elm.hasClass('message-center-growl')).toBeTruthy();
+                expect(elm.hasClass('top')).toBeTruthy();
+                expect(elm.hasClass('right')).toBeTruthy();
+            });
+        });
+        
+        describe('right', function () {
+            beforeEach(function () {
+                initializeTest({ growl: true, growlposition: 'rigth' });
+            });
+
+            it('should initialize with growl right top', function () {
+                expect(elm.hasClass('message-center-growl')).toBeTruthy();
+                expect(elm.hasClass('top')).toBeTruthy();
+                expect(elm.hasClass('right')).toBeTruthy();
+            });
+        });
+        
+        describe('left', function () {
+            beforeEach(function () {
+                initializeTest({ growl: true, growlposition: 'left' });
+            });
+
+            it('should initialize with growl left top', function () {
+                expect(elm.hasClass('message-center-growl')).toBeTruthy();
+                expect(elm.hasClass('top')).toBeTruthy();
+                expect(elm.hasClass('left')).toBeTruthy();
+            });
+        });
+        
+        describe('bottom right', function () {
+            beforeEach(function () {
+                initializeTest({ growl: true, growlposition: 'bottom rigth' });
+            });
+
+            it('should initialize with growl right bottom', function () {
+                expect(elm.hasClass('message-center-growl')).toBeTruthy();
+                expect(elm.hasClass('bottom')).toBeTruthy();
+                expect(elm.hasClass('right')).toBeTruthy();
+            });
+        });
+        
+        describe('bottom left', function () {
+            beforeEach(function () {
+                initializeTest({ growl: true, growlposition: 'bottom left' });
+            });
+
+            it('should initialize with growl left bottom', function () {
+                expect(elm.hasClass('message-center-growl')).toBeTruthy();
+                expect(elm.hasClass('bottom')).toBeTruthy();
+                expect(elm.hasClass('left')).toBeTruthy();
+            });
+        });
     });
 });
