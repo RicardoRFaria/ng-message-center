@@ -9,7 +9,7 @@ module.exports = function (grunt) {
                 },
                 dist: {
                     src: ['src/**/*.js'],
-                    dest: 'dist/ng-message-center.js' 
+                    dest: 'dist/ng-message-center.js'
                 }
             },
             css: {
@@ -18,19 +18,19 @@ module.exports = function (grunt) {
                 },
                 dist: {
                     src: ['src/**/*.css'],
-                    dest: 'dist/ng-message-center.css' 
+                    dest: 'dist/ng-message-center.css'
                 }
             }
         },
-		
-		uglify: {
-			dist: {
-			  files: {
-				'dist/ng-message-center.min.js': ['src/**/*.js']
-				}
-			}
-		},
-        
+
+        uglify: {
+            dist: {
+                files: {
+                    'dist/ng-message-center.min.js': ['src/**/*.js']
+                }
+            }
+        },
+
         cssmin: {
             options: {
                 shorthandCompacting: false,
@@ -66,6 +66,11 @@ module.exports = function (grunt) {
             unit: {
                 configFile: 'karma.conf.js',
                 singleRun: true
+            },
+            continuous: {
+                configFile: 'karma.conf.js',
+                singleRun: true,
+                browsers: ['PhantomJS']
             }
         },
 
@@ -73,15 +78,16 @@ module.exports = function (grunt) {
 
     });
 
-    
+
     grunt.registerTask('test', ['clean', 'jshint']);
     grunt.registerTask('default', ['clean', 'karma', 'concat', 'uglify', 'cssmin']);
-    
+    grunt.registerTask('continuous', ['clean', 'karma:continuous', 'concat', 'uglify', 'cssmin']);
+
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 };
