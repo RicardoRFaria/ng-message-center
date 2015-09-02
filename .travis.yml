@@ -10,6 +10,3 @@
   - bower install
 
  script: grunt continuous
- 
- after_success:
-  coveralls

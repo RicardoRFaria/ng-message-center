@@ -1,4 +1,4 @@
-ng-message-center ![alt tag](https://travis-ci.org/RicardoRFaria/ng-message-center.svg?branch=master)
+ng-message-center ![alt tag](https://travis-ci.org/RicardoRFaria/ng-message-center.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/RicardoRFaria/ng-message-center-ext/badge.svg?branch=master&service=github)](https://coveralls.io/github/RicardoRFaria/ng-message-center-ext?branch=master)
 =================
 
 Message library for AngularJS
