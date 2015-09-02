@@ -62,6 +62,14 @@ module.exports = function (grunt) {
             }
         },
 
+        coveralls: {
+            options: {
+                debug: true,
+                coverageDir: 'report/',
+                force: true
+            }
+        },
+
         karma: {
             unit: {
                 configFile: 'karma.conf.js',
@@ -81,10 +89,12 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', ['clean', 'jshint']);
     grunt.registerTask('default', ['clean', 'karma', 'concat', 'uglify', 'cssmin']);
-    grunt.registerTask('continuous', ['clean', 'karma:continuous', 'concat', 'uglify', 'cssmin']);
+    grunt.registerTask('continuous', ['clean', 'karma:continuous', 'concat', 'uglify', 'cssmin', 'coveralls']);
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-coveralls');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-karma-coveralls');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');

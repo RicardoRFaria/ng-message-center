@@ -60,8 +60,10 @@ module.exports = function (config) {
       subdir: function (browser) {
         return 'coverage/';
       },
-      // if type is text or text-summary, you can set the file name
-      // file: 'coverage.txt'
+      reporters: [
+        { type: 'lcov', subdir: 'report-lcov' },
+        { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' }
+      ]
     },
 
     // Continuous Integration mode
