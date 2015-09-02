@@ -1,4 +1,4 @@
-ng-message-center
+ng-message-center ![alt tag](https://travis-ci.org/RicardoRFaria/ng-message-center.svg?branch=master)
 =================
 
 Message library for AngularJS
