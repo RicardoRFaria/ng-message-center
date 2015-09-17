@@ -6,7 +6,7 @@
     "Ricardo Faria <ricardo.faria@outlook.com.br>"
   ],
   "description": "Message library for AngularJS",
-  "main": "ng-message-center.js",
+  "main": "./dist/ng-message-center.min.js",
   "keywords": [
     "angular",
     "message",
