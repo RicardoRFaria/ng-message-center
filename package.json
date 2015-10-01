@@ -1,6 +1,6 @@
 {
   "name": "ng-message-center-ext",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Message library for AngularJS",
   "main": "ng-message-center.js",
   "devDependencies": {
